@@ -1,0 +1,8 @@
+@media screen and (max-width:540px){
+    .Container {
+        width:100%;
+        background-color:#302e2c;
+        color:#dcd8b8;
+        padding:10px;
+    }
+}

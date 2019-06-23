@@ -1,0 +1,10 @@
+@media screen and (max-width:540px){
+    .SearchForm{
+        display: flex;
+        flex-direction: column
+    }
+
+    .SearchForm-button{
+        background-color:#dcd8b8;
+    }
+}

@@ -16,7 +16,6 @@
 @media screen and (max-width: 540px){
   .App {
     width:90vw;
-    background-color:#302e2c;
     height: auto;
     margin: 0 auto;
     text-align: center;

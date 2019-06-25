@@ -9,13 +9,22 @@ class SearchForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    componentDidMount() {
+        // fetch("http://localhost:3001/handleApi")
+        //     .then(data => console.log(data))
+        //     .catch(console.log);
+        
+    }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
     handleSubmit(e) {
         e.preventDefault();
-        alert(`You typed: ${this.state.camera}`)
-        this.setState({ camera: "" })
+        fetch("http://localhost:3001/handleApi")
+        .then((response)=>response.json())
+        .then((data) => console.log(data))
+        // alert(`You typed: ${this.state.camera} and ${this.state.sol} `)
+        // this.setState({ camera: "" })
     }
     render() {
         return (
@@ -33,11 +42,14 @@ class SearchForm extends Component {
                         Camera
                         <select id="camera" name="camera"
                             value={this.state.camera} onChange={this.handleChange}>
-                            <option value="Any" selected>Any</option>
-                            <option value="grapefruit">Grapefruit</option>
-                            <option value="lime">Lime</option>
-                            <option value="coconut">Coconut</option>
-                            <option value="mango">Mango</option>
+                            <option value="Any">Any</option>
+                            <option value="FHAZ">FHAZ</option>
+                            <option value="RHAZ">RHAZ</option>
+                            <option value="MAST">MAST</option>
+                            <option value="CHEMCAM">CHEMCAM</option>
+                            <option value="MAHLI">MAHLI</option>
+                            <option value="MARDI">MARDI</option>
+                            <option value="NAVCAM">NAVCAM</option>
                         </select>
                     </label>
                     {/* <label htmlFor="camera">Camera</label>
@@ -48,7 +60,10 @@ class SearchForm extends Component {
                         onChange={this.handleChange}
                         placeholder="camera" /> */}
                     <br />
-                    <button className="SearchForm-button">Find Photos</button>
+                    <button className="SearchForm-button"
+                        onClick={this.handleSubmit}>
+                        Find Photos
+                    </button>
                 </form>
             </div>
         );

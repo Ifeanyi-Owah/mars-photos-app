@@ -13,7 +13,6 @@ class SearchForm extends Component {
         // fetch("http://localhost:3001/handleApi")
         //     .then(data => console.log(data))
         //     .catch(console.log);
-        
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })

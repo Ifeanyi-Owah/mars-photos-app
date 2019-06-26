@@ -14,7 +14,7 @@ class Photos extends Component {
     }
 
     loadPhotos(val1, val2) {
-        fetch("http://localhost:3001/handleApi", {
+        fetch("https://glacial-scrubland-35919.herokuapp.com//handleApi", {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json",

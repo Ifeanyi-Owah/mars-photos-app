@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PhotoItem from "../PhotoItem/PhotoItem";
+import SearchForm from "../SearchForm/SearchForm";
 import axios from 'axios';
+import "./Photos.css"
 
 class Photos extends Component {
     constructor(props) {
@@ -8,58 +10,40 @@ class Photos extends Component {
         this.state = {
             photoData: []
         }
+        this.loadPhotos = this.loadPhotos.bind(this);
     }
-    componentDidMount() {
-        this.loadPhotos();
-    }
-    loadPhotos() {
-        fetch("http://localhost:3001/handleApi")
+
+    loadPhotos(val1, val2) {
+        fetch("http://localhost:3001/handleApi", {
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json",
+            }),
+            body: JSON.stringify({ sol: val1, camera: val2 })
+        })
             .then((response) => response.json())
             .then((data) => {
                 const photoData = data.photos.slice(0, 9);
-                const updatedPhoto = photoData.map(photodata =>{
-                    return{
+                const updatedPhoto = photoData.map(photodata => {
+                    return {
                         ...photodata,
                     }
-                } 
-
+                }
                 )
                 this.setState({ photoData: updatedPhoto })
                 console.log(photoData);
             })
-
-
-        //     fetch("http://localhost:3001/handleApi")
-        //         .then(response => {
-        //             if (!response.ok) {
-        //                 if (response.status >= 400 && response.status < 500) {
-        //                     return response.json().then(data => {
-        //                         console.log(data)
-        //                         let err = { errMessage: data.message };
-        //                         throw err;
-        //                     })
-        //                 } else {
-        //                     let err = { errMessage: 'Opps! The server is not responding..please try again!' };
-        //                     throw err;
-        //                 }
-        //             }
-        //             return response.json();
-        //         })
-        //         .then(photoData => this.setState({photoData: response.data.photoData}))
-    }
+    };
     render() {
-        //    const photos = this.state.photoData.map((p, i)=>(
-        //        <PhotoItem 
-        //        key={p.id}
-        //            {...p}/> 
-        //    ));
+
         const photos = this.state.photoData.map(photo => {
             return <PhotoItem key={photo.id} img_src={photo.img_src} />
         }
 
         );
         return (
-            <div>
+            <div className="Photos">
+                <SearchForm loadPhotos={this.loadPhotos} />
                 <h1>Photos</h1>
                 {photos}
             </div>
